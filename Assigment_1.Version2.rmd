@@ -1,0 +1,68 @@
+birthweight=read.table("birthweight.txt",header=TRUE)
+geboortegewicht=birthweight$birthweight; #adding $birthweight makes it structure the data to be more easily visible
+geboortegewicht
+
+install.packages("ggpubr")
+library("dplyr")
+library("ggpubr")
+
+#1.1 
+#a)
+par(mfrow=c(n,m))
+hist(geboortegewicht)
+qqnorm(geboortegewicht)
+shapiro.test(geboortegewicht)
+point_estimate = mean(geboortegewicht); point_estimate
+summary(geboortegewicht)
+
+#b)
+standard_deviation = sd(geboortegewicht) ; standard_deviation
+sigma = 0.9 ;sigma
+confidence_level_for_two_sides = sigma + 0.05 ;confidence_level_for_two_sides #since its two sided 
+critical_value = qnorm(confidence_level_for_two_sides) ;critical_value
+margin_of_error =  critical_value * (standard_deviation / sqrt(length(geboortegewicht))) ;margin_of_error
+lowerbound = point_estimate - margin_of_error
+upperbound = point_estimate + margin_of_error
+print(lowerbound);print(upperbound)
+
+##2829.618 & 2996.967 
+
+#c)
+# H0 : point_estimate > 2800
+# h1 : point_estimate <= 2800
+# one tailed right tailed
+# T test statistic mu = 2800, Xdash = 2913.3, sd=83.7 n=188
+# assuming standard confidence level of 0.95
+t.test(x = geboortegewicht, mu=2800, alternative='greater', conf.level=0.95)
+
+#d)
+
+#1.3
+#a)
+weather=read.table("weather.txt",header=TRUE); weather
+
+summary(weather) #numerical summary
+
+humidity = weather$humidity ; humidity
+temperature = weather$temperature ; temperature
+
+par(mfrow=c(1,2)); hist(humidity); hist(temperature) # graphical summary
+
+#b)
+par(mfrow=c(1,2)); qqnorm(humidity); qqnorm(temperature) # graphical normality
+
+#c)
+t.test(x= temperature, alternative= "two.sided", conf.level=0.9)
+#[47.49 : 57.96]
+
+#d)
+standdev = sd(humidity);
+E_humidity = 0.02/2 * mean(humidity)
+alpha=0.05
+statistic = qnorm(1-alpha/2) ; statistic
+
+minimal_sample_size=((statistic^2)*(standdev^2))/(E_humidity^2);
+print(minimal_sample_size)
+#228
+
+

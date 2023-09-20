@@ -1,0 +1,45 @@
+1.1a)
+The data is checked for normality by first showing a visual distribution of the data.
+Here a histogram is used, in combination with a qqplot, 
+in the qqplot the outliers seem to differentiate quite a bit but the rest is in a relatively straight line 
+Then for conclusive meassurements a shapiro wilktest is produced with a high p-value. 
+We conclude that the data is normally distributed
+
+1.1b)
+To make a confidence interval of 90% we first need to calculate sigma given that a two tailed sample is used
+thus we check for 5 percent on each side (0.9 +0.05 +0.05 = 1)
+Then we calculate the margin of error: ME = Zscore * (standard deviation of sample / squared root of sample size)
+The margin or error is then substracted and added to the mean to create upper and lower bounds
+Providing us witht he following range [2829.6 : 2996.9]
+
+1.1c)
+To test if the birthweight is bigger than 2800, we want to proof that its not smaller than or equal to 2800
+H0 : point_estimate > 2800
+H1 : point_estimate <= 2800
+For a one tailed test we fill in the t.test function with the dataset, meaning it can already derive df and sd by itself
+We conclude that the true mean is greater than 2800
+
+1.1d)
+The confidence interval differs since it does not have an end on the right side. This makes sense.
+We want to confidentely say that the population mean is bigger than 2800 if the sample mean is above a certain number.
+This number given the degrees of freedom a sample mean above 2829 gives us the confidence to say the population mean is above 2800.
+Any value above that will definitely result in a population mean above 2829 and no upper bound is necessary, making the interval looking different
+
+1.3a)
+Both numerical and graphical summaries are found in the code 
+
+1.3b)
+By using a qq plot we get a visual indication that the humidity on the left is relatively well normally distributed. 
+It is noticable that the outliers on the end differ from the straight line but in general it's fine
+The temperature plot however appears to be not normally distributed. It is showing an s-shape.
+
+1.3c)
+[47.49 : 57.96]
+When using the t.test method a couple of things happen. The sample mean (52.72) is compared with 0.
+Obviously 0 is not the population mean and that is concluded by R as well. Then it shows a confidence interval
+of 90%. This confidence interval entails that given the sample mean we can say with 90% certainty that the population mean is between 47.49 and 57.96
+
+1.3d)
+sample size n= (tscore/2 )^ 2 * standarddev^2 / E^2. E = margin of error = 0.02 over two tails devided = 0.01
+t score is qnorm(alpha/2). When filling this is we will find the minimum sample size.
+We see a sample size of 227, meaning that from 227 datapoints we can have a confidence interval with 95% such that length <= 2%
